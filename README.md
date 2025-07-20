@@ -296,7 +296,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Built with [Claude Code](https://claude.ai/code) using Claude Flow swarm coordination
+- Built with [Claude Code](https://claude.ai/code) 
 - UI components from [shadcn/ui](https://ui.shadcn.com/)
 - Authentication powered by [Supabase](https://supabase.com/)
 - AI processing by [Anthropic Claude](https://anthropic.com/)
@@ -357,4 +357,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with Next.js, Supabase, and Claude AI** 🧠  
 **Powered by intelligent thought organization** 🚀
->>>>>>> 94c4902110236d8c3155f1cf76d4f2ddc6ee2285
