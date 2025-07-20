@@ -1,19 +1,12 @@
 {
   "name": "minddump-app",
-  "version": "1.0.0",
-  "description": "AI-powered intelligent thought organizer with 15-category routing system",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "tsc --noEmit --watch",
-    "preview": "npm run build && npm run start",
-    "clean": "rm -rf .next out node_modules/.cache",
-    "test": "echo \"Tests not configured yet\" && exit 0"
+    "lint": "next lint"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.56.0",
@@ -49,23 +42,5 @@
     "eslint-config-next": "15.3.5",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "keywords": [
-    "ai",
-    "thought-organizer",
-    "next.js",
-    "supabase",
-    "voice-to-text",
-    "categorization"
-  ],
-  "author": "Corey Bello <coreybello94@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/coreybello/minddumpapp.git"
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
   }
 }

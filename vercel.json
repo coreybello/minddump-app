@@ -1,23 +1,35 @@
 {
-  "name": "minddump-app",
   "version": 2,
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "outputDirectory": ".next",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "regions": ["iad1"],
   "functions": {
-    "app/**/*.tsx": {
-      "maxDuration": 30
-    },
     "app/api/**/*.ts": {
-      "maxDuration": 60
+      "maxDuration": 30
     }
   },
-  "headers": [
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
+    "ANTHROPIC_API_KEY": "@anthropic_api_key",
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "GITHUB_CLIENT_ID": "@github_client_id",
+    "GITHUB_CLIENT_SECRET": "@github_client_secret",
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "@github_personal_access_token",
+    "GOOGLE_SHEETS_CLIENT_EMAIL": "@google_sheets_client_email",
+    "GOOGLE_SHEETS_PRIVATE_KEY": "@google_sheets_private_key",
+    "GOOGLE_SHEETS_MASTER_ID": "@google_sheets_master_id",
+    "WEBHOOKS_ENABLED": "@webhooks_enabled",
+    "WEBHOOK_AUTH_TOKEN": "@webhook_auth_token"
+  },
+  "rewrites": [
     {
       "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
@@ -37,15 +49,5 @@
         }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/home",
-      "destination": "/",
-      "permanent": true
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
