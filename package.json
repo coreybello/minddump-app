@@ -1,0 +1,71 @@
+{
+  "name": "minddump-app",
+  "version": "1.0.0",
+  "description": "AI-powered intelligent thought organizer with 15-category routing system",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
+    "preview": "npm run build && npm run start",
+    "clean": "rm -rf .next out node_modules/.cache",
+    "test": "echo \"Tests not configured yet\" && exit 0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
+    "@radix-ui/react-alert-dialog": "^1.1.14",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/supabase-js": "^2.51.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cookie": "^0.7.2",
+    "framer-motion": "^12.23.6",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^142.0.0",
+    "isows": "^1.0.6",
+    "lucide-react": "^0.525.0",
+    "next": "15.3.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.3.1",
+    "whatwg-url": "^14.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "critters": "^0.0.24",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "keywords": [
+    "ai",
+    "thought-organizer",
+    "next.js",
+    "supabase",
+    "voice-to-text",
+    "categorization"
+  ],
+  "author": "Corey Bello <coreybello94@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coreybello/minddumpapp.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}

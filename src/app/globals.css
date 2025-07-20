@@ -1,0 +1,597 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --midnight-purple: #1a0b2e;
+  --deep-purple: #16213e;
+  --cyber-purple: #7209b7;
+  --neon-cyan: #00ffff;
+  --neon-pink: #ff00ff;
+  --neon-green: #39ff14;
+  --matrix-green: #00ff41;
+  --dark-bg: #0a0a0a;
+  --card-bg: rgba(26, 11, 46, 0.6);
+  --border-glow: rgba(0, 255, 255, 0.3);
+}
+
+html, body {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: radial-gradient(ellipse at top, var(--midnight-purple) 0%, var(--dark-bg) 70%);
+  color: #ffffff;
+  position: relative;
+}
+
+/* Cyberpunk grid background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Cyber scan lines */
+.scan-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(
+    transparent 98%, 
+    rgba(0, 255, 255, 0.03) 100%
+  );
+  background-size: 100% 4px;
+  animation: scan 0.1s linear infinite;
+}
+
+/* Glitch effect utility classes */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 2s infinite;
+  color: var(--neon-cyan);
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 2s infinite;
+  color: var(--neon-pink);
+  z-index: -2;
+}
+
+/* Loading animations */
+.loading-animation {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.loading-animation:nth-child(1) { animation-delay: 0.1s; }
+.loading-animation:nth-child(2) { animation-delay: 0.2s; }
+.loading-animation:nth-child(3) { animation-delay: 0.3s; }
+.loading-animation:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Terminal cursor */
+.cursor {
+  display: inline-block;
+  background-color: var(--neon-cyan);
+  width: 2px;
+  height: 1.2em;
+  animation: blink 1s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-purple);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* Custom selection */
+::selection {
+  background: var(--neon-cyan);
+  color: var(--dark-bg);
+}
+
+/* Enhanced Cyber card styling */
+.cyber-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-glow);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.1),
+    inset 0 0 20px rgba(0, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+  transition: all 0.3s ease;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--cyber-purple), var(--neon-cyan));
+  z-index: -1;
+  opacity: 0.3;
+  animation: borderPulse 3s infinite;
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+.cyber-card:hover {
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(0, 255, 255, 0.1);
+  border-color: var(--neon-cyan);
+  transform: translateY(-2px);
+}
+
+/* Enhanced Input styling */
+.cyber-input {
+  background: rgba(0, 10, 20, 0.95);
+  border: 2px solid var(--border-glow);
+  color: var(--neon-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.cyber-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  background: rgba(0, 10, 20, 1);
+}
+
+.cyber-input::placeholder {
+  color: rgba(0, 255, 255, 0.5);
+  opacity: 0.7;
+}
+
+/* Enhanced Button styling */
+.cyber-button {
+  background: linear-gradient(45deg, var(--cyber-purple), var(--midnight-purple));
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:hover {
+  box-shadow: 
+    0 0 25px rgba(0, 255, 255, 0.4),
+    0 8px 25px rgba(0, 255, 255, 0.2);
+  transform: translateY(-3px);
+  background: linear-gradient(45deg, var(--neon-cyan), var(--cyber-purple));
+  color: var(--dark-bg);
+}
+
+/* Cyber animations */
+@keyframes cyberGlow {
+  0%, 100% { 
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); 
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.8); 
+    filter: brightness(1.2);
+  }
+}
+
+.animate-cyber-glow {
+  animation: cyberGlow 2s infinite;
+}
+
+/* Enhanced Terminal styling */
+.terminal-text {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--neon-green);
+  text-shadow: 0 0 10px var(--neon-green);
+}
+
+/* Cyber section headers */
+.cyber-section-title {
+  color: var(--neon-cyan);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-shadow: 0 0 10px var(--neon-cyan);
+  position: relative;
+}
+
+.cyber-section-title::before {
+  content: "▶";
+  color: var(--cyber-purple);
+  animation: sparkle 1.5s infinite;
+  text-shadow: 0 0 15px var(--cyber-purple);
+  margin-right: 10px;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.3); }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  /* Reduce complex animations on mobile for performance */
+  .scan-lines {
+    background-size: 100% 2px;
+    animation-duration: 0.2s;
+  }
+  
+  .cyber-card {
+    clip-path: none; /* Simplify for mobile */
+    border-radius: 8px;
+  }
+  
+  .cyber-section-title {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+  }
+  
+  .cyber-button {
+    clip-path: none;
+    border-radius: 6px;
+  }
+  
+  /* Simplified animations for better mobile performance */
+  .glitch::before,
+  .glitch::after {
+    display: none;
+  }
+  
+  /* Better touch targets */
+  button, .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improved text readability */
+  .cyber-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* Enhanced Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .scan-lines,
+  .animate-cyber-float,
+  .animate-cyber-glow,
+  .animate-pulse,
+  .glitch::before,
+  .glitch::after {
+    animation: none !important;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --neon-cyan: #00ffff;
+    --neon-green: #00ff00;
+    --neon-purple: #ff00ff;
+    --cyber-purple: #9945ff;
+    --border-glow: rgba(0, 255, 255, 0.8);
+  }
+  
+  .cyber-card {
+    border-width: 3px;
+  }
+  
+  .cyber-input {
+    border-width: 2px;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.cyber-button:focus,
+.cyber-input:focus,
+button:focus {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--neon-cyan);
+}
+
+/* Improved loading states */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--midnight-purple) 25%,
+    var(--cyber-purple) 50%,
+    var(--midnight-purple) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Print styles */
+@media print {
+  .scan-lines,
+  .cyber-card::before,
+  header,
+  #error-monitor {
+    display: none !important;
+  }
+  
+  .cyber-card {
+    border: 1px solid #000;
+    background: white;
+    color: black;
+  }
+  
+  .text-neon-cyan,
+  .text-neon-green,
+  .text-neon-purple {
+    color: black !important;
+  }
+}
+
+/* Additional cyber animations */
+@keyframes glitch-1 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-2px) skew(-5deg); }
+  40% { transform: translateX(2px) skew(5deg); }
+  60% { transform: translateX(-1px) skew(-2deg); }
+  80% { transform: translateX(1px) skew(2deg); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(2px) skew(5deg); }
+  40% { transform: translateX(-2px) skew(-5deg); }
+  60% { transform: translateX(1px) skew(2deg); }
+  80% { transform: translateX(-1px) skew(-2deg); }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes neural-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 10px var(--neon-cyan);
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 25px var(--neon-cyan), 0 0 50px var(--neon-cyan);
+  }
+}
+
+/* Clip path utilities for cyber buttons */
+.clip-path-button {
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.clip-path-button-sm {
+  clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+}
+
+.clip-path-button-lg {
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+}
+
+/* Enhanced hover effects */
+.cyber-hover-lift {
+  transition: all 0.3s cubic-bezier(0.25, 0.25, 0, 1);
+}
+
+.cyber-hover-lift:hover {
+  transform: translateY(-8px) rotateX(5deg);
+  box-shadow: 
+    0 20px 40px rgba(0, 255, 255, 0.2),
+    0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+/* Smooth page transitions */
+.page-transition {
+  animation: pageSlideIn 0.6s cubic-bezier(0.25, 0.25, 0, 1);
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotateX(-10deg);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+/* Form input animations */
+.cyber-input-focus {
+  position: relative;
+}
+
+.cyber-input-focus::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.cyber-input-focus:focus::after {
+  width: 100%;
+}
+
+/* Utility classes for animations */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.25, 0, 1);
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.25, 0.25, 0, 1);
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.25, 0.25, 0, 1);
+}
+
+.animate-neural-pulse {
+  animation: neural-pulse 2s infinite;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Responsive animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
