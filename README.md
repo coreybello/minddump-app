@@ -320,6 +320,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
+<<<<<<< HEAD
 - **🐛 Bug Reports**: Create GitHub issue with details
 - **💡 Feature Requests**: Use GitHub discussions
 - **📖 Documentation**: Check guides above
@@ -339,3 +340,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Transform your scattered thoughts into organized, automated action. Start your MindDump journey today!** 🧠✨
 
 *Built with Claude Flow swarm coordination • Powered by Claude AI • Secured by Supabase*
+=======
+- **Issues**: [GitHub Issues](https://github.com/coreybello/minddumpapp/issues)
+- **Documentation**: Available in the `/docs` directory
+
+## 🎯 Roadmap
+
+- [ ] Mobile app development
+- [ ] Advanced analytics and insights
+- [ ] Team collaboration features
+- [ ] API rate limiting improvements
+- [ ] Enhanced voice recognition
+- [ ] Multi-language support
+
+---
+
+**Built with Next.js, Supabase, and Claude AI** 🧠  
+**Powered by intelligent thought organization** 🚀
+>>>>>>> 94c4902110236d8c3155f1cf76d4f2ddc6ee2285
