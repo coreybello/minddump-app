@@ -140,7 +140,17 @@ async function handlePOST(request: NextRequest): Promise<NextResponse> {
   }
 
   // Verify webhook signature if secret is configured
-  if (process.env.WEBHOOK_SECRET && signature) {
+  if (process.env.WEBHOOK_SECRET) {
+    const headerSignature = request.headers.get('x-webhook-signature') || undefined
+
+    if (!headerSignature) {
+      throw new APIError(
+        'Webhook signature required',
+        403,
+        'MISSING_SIGNATURE'
+      )
+    }
+
     const payloadString = JSON.stringify({
       input,
       category,
@@ -149,13 +159,13 @@ async function handlePOST(request: NextRequest): Promise<NextResponse> {
       timestamp,
       expanded
     })
-    
+
     const isValidSignature = verifyWebhookSignature(
       payloadString,
-      signature,
+      headerSignature,
       process.env.WEBHOOK_SECRET
     )
-    
+
     if (!isValidSignature) {
       throw new APIError(
         'Invalid webhook signature',
@@ -163,12 +173,6 @@ async function handlePOST(request: NextRequest): Promise<NextResponse> {
         'INVALID_SIGNATURE'
       )
     }
-  } else if (process.env.WEBHOOK_SECRET && !signature) {
-    throw new APIError(
-      'Webhook signature required',
-      403,
-      'MISSING_SIGNATURE'
-    )
   }
 
   // Log webhook receipt

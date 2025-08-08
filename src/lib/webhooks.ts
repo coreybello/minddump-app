@@ -188,7 +188,11 @@ export function getWebhookCategories(): string[] {
  * Check if webhooks are enabled (based on environment)
  */
 export function areWebhooksEnabled(): boolean {
-  return process.env.ENABLE_WEBHOOKS !== 'false'
+  // Support both env names for compatibility
+  const flag1 = process.env.WEBHOOKS_ENABLED
+  const flag2 = process.env.ENABLE_WEBHOOKS
+  // Default to true unless explicitly set to 'false'
+  return !(flag1 === 'false' || flag2 === 'false')
 }
 
 /**

@@ -19,7 +19,8 @@
     "GOOGLE_SHEETS_PRIVATE_KEY": "@google_sheets_private_key",
     "GOOGLE_SHEETS_MASTER_ID": "@google_sheets_master_id",
     "WEBHOOKS_ENABLED": "@webhooks_enabled",
-    "WEBHOOK_AUTH_TOKEN": "@webhook_auth_token"
+    "WEBHOOK_AUTH_TOKEN": "@webhook_auth_token",
+    "WEBHOOK_SECRET": "@webhook_secret"
   },
   "rewrites": [
     {
