@@ -24,6 +24,35 @@ export default function AuthPage() {
     return () => subscription.unsubscribe()
   }, [router, supabase.auth])
 
+  // Create floating particles without inline scripts
+  useEffect(() => {
+    const container = document.querySelector('.cyber-particles')
+    if (!container) return
+
+    const particles: HTMLElement[] = []
+    const particleCount = 15
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div')
+      particle.className = 'cyber-particle'
+      particle.style.left = Math.random() * 100 + '%'
+      particle.style.width = Math.random() * 3 + 1 + 'px'
+      particle.style.height = Math.random() * 20 + 5 + 'px'
+      particle.style.animationDelay = Math.random() * 15 + 's'
+      particle.style.animationDuration = (Math.random() * 10 + 10) + 's'
+      container.appendChild(particle)
+      particles.push(particle)
+    }
+
+    return () => {
+      for (const p of particles) {
+        if (p.parentElement === container) {
+          container.removeChild(p)
+        }
+      }
+    }
+  }, [])
+
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -359,34 +388,7 @@ export default function AuthPage() {
         </div>
       </div>
 
-      {/* Floating Particles Script */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          function createCyberParticles() {
-            const container = document.querySelector('.cyber-particles');
-            if (!container) return;
-            
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-              const particle = document.createElement('div');
-              particle.className = 'cyber-particle';
-              particle.style.left = Math.random() * 100 + '%';
-              particle.style.width = Math.random() * 3 + 1 + 'px';
-              particle.style.height = Math.random() * 20 + 5 + 'px';
-              particle.style.animationDelay = Math.random() * 15 + 's';
-              particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-              container.appendChild(particle);
-            }
-          }
-          
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', createCyberParticles);
-          } else {
-            createCyberParticles();
-          }
-        `
-      }} />
+      {/* Particles created via useEffect */}
     </div>
   )
 }

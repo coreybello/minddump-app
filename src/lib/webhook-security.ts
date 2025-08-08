@@ -60,13 +60,32 @@ export function verifyWebhookSignature(
   secret: string,
   algorithm: 'sha256' | 'sha1' = 'sha256'
 ): boolean {
-  const expectedSignature = generateWebhookSignature(payload, secret, algorithm)
-  
-  // Use timing-safe comparison to prevent timing attacks
-  return crypto.timingSafeEqual(
-    Buffer.from(signature, 'utf8'),
-    Buffer.from(expectedSignature, 'utf8')
-  )
+  // Require formatted signature like 'sha256=...'
+  if (!signature || !signature.includes('=')) {
+    return false
+  }
+
+  const [sigAlg] = signature.split('=', 2)
+  const algo: 'sha256' | 'sha1' = (sigAlg === 'sha1' || sigAlg === 'sha256') ? sigAlg : algorithm
+
+  const expectedSignature = generateWebhookSignature(payload, secret, algo)
+
+  // Prevent timingSafeEqual from throwing on different lengths
+  if (
+    Buffer.byteLength(signature, 'utf8') !==
+    Buffer.byteLength(expectedSignature, 'utf8')
+  ) {
+    return false
+  }
+
+  try {
+    return crypto.timingSafeEqual(
+      Buffer.from(signature, 'utf8'),
+      Buffer.from(expectedSignature, 'utf8')
+    )
+  } catch {
+    return false
+  }
 }
 
 /**
